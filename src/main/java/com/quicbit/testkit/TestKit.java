@@ -17,12 +17,12 @@ public class TestKit {
         Object apply(Row r);
     }
 
-    static class Options {
+    public static class Options {
         int max_tests = 0;
         String assertion = "same";      // "none", "same", "contains" or "throws"
     }
 
-    static class Row {
+    public static class Row {
         Object[] values;
         Table table;
 
@@ -84,7 +84,7 @@ public class TestKit {
         }
     }
 
-    static class Table {
+    public static class Table {
         TestKit context;
         String[] header;
         Row[] rows;
@@ -197,7 +197,7 @@ public class TestKit {
     }
 
     // format() was copied from org.junit.Assert to replicate look and feel of assertion messages
-    static String format(Object obj) {
+    public static String format(Object obj) {
         String ret;
         if (obj != null && obj.getClass().isArray()) {
             ret = Arrays.deepToString(arrayOf(obj));
