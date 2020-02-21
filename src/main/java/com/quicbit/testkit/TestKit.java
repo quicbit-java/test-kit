@@ -166,7 +166,7 @@ public class TestKit {
                 } else {
                     actual = fn.apply(row);
                 }
-                String msg = format(row.inputs()) + " -expect-> " + format(row.expected());
+                String msg = Format.format(row.inputs()) + " -expect-> " + Format.format(row.expected());
                 try {
                     Object expected = row.expected();
                     if (expected != null && expected.getClass().isArray()) {
@@ -195,8 +195,8 @@ public class TestKit {
                     ok = false;
                     context.out.println("not ok " + context.num_tests + " : " + msg);
                     context.out.println("  ---");
-                    context.out.println("    expected: " + format(row.expected()));
-                    context.out.println("    actual:   " + format(actual));
+                    context.out.println("    expected: " + Format.format(row.expected()));
+                    context.out.println("    actual:   " + Format.format(actual));
                     context.out.println("    " + e.getMessage());
                     e.printStackTrace(context.out);
                     context.out.println();
@@ -209,20 +209,7 @@ public class TestKit {
     }
 
     public static String desc (String msg, Object[] input, Object expected) {
-        return msg + " " + format(input) + " -expect-> " + format(expected);
-    }
-
-    // format() was copied from org.junit.Assert to replicate look and feel of assertion messages
-    public static String format(Object obj) {
-        String ret;
-        if (obj != null && obj.getClass().isArray()) {
-            ret = Arrays.deepToString(arrayOf(obj));
-        } else {
-            ret = String.valueOf(obj);
-        }
-        ret = ret.replaceAll("\\r", "");
-        ret = ret.replaceAll("\\n", " ");
-        return "(" + ret + ")";
+        return msg + ": (" + Format.formatArr(input, false) + ") -expect-> (" + Format.format(expected) + ")";
     }
 
     public static Object[] arrayOf (Object a) {

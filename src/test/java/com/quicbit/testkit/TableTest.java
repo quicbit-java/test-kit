@@ -20,4 +20,13 @@ public class TableTest {
             }
         );
     }
+
+    @Test
+    public void testDesc() {
+        table(
+            a("label", "input", "output", "exp"),
+            a("msg", a("a"), 0, "msg: (\"a\") -expect-> (0)"),
+            a("msg", a(1, 2), 3, "msg: (1,2) -expect-> (3)")
+        ).test("desc", (r) -> desc(r.str("label"), r.arr("input"), r.ival("output")));
+    }
 }
